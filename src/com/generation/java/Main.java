@@ -71,8 +71,13 @@ public class Main
             return;
         }
         System.out.println( course );
-        studentService.enrollToCourse( studentId, course );
-        System.out.println( "Student with ID: " + studentId + " enrolled successfully to " + courseId );
+            if(student.getEnrolledCourses().size() == 0 || student.findCourseById(courseId) == null) {
+                studentService.enrollToCourse( studentId, course );
+                System.out.println( "Student with ID: " + studentId + " enrolled successfully to " + courseId );
+            }
+            else {
+                System.out.println("Student already enrolled this course.");
+            }
 
     }
 
@@ -120,10 +125,17 @@ public class Main
                 return;
             }
 
-            double grade;
+            double grade = 0;
             do {
-                System.out.println("Insert course grade (min: 1, max:6) for " + courseId);
-                grade = Double.parseDouble(scanner.next());
+                try {
+                    
+                    System.out.println("Insert course grade (min: 1, max:6) for " + courseId);
+                    grade = Double.parseDouble(scanner.next());
+                    
+                } catch (NumberFormatException e) {
+
+                    System.out.println("Error: Please enter a number");
+                }
 
             } while (grade < 1.0 || grade > 6.0);
 
