@@ -71,7 +71,7 @@ public class Main
             return;
         }
         System.out.println( course );
-            if(student.getEnrolledCourses().size() == 0 || student.findCourseById(courseId) == null) {
+            if(student.findCourseById(courseId) == null) {
                 studentService.enrollToCourse( studentId, course );
                 System.out.println( "Student with ID: " + studentId + " enrolled successfully to " + courseId );
             }
@@ -121,7 +121,7 @@ public class Main
             String courseId = scanner.next();
             Course course = student.findCourseById(courseId);
             if (course == null) {
-                System.out.println("Student does not have this course enrolled");
+                System.out.println("Course not found");
                 return;
             }
 
